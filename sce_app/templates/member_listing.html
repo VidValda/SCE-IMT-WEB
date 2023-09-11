@@ -6,21 +6,25 @@
 </head>
 <body>
     <h1>Active Members of SCE</h1>
-    
+
     <h2>Filter by Project:</h2>
     <form method="get">
-        <select name="project">
-            <option value="">All Projects</option>
-            {% for project in projects %}
-                <option value="{{ project.id }}">{{ project.title }}</option>
-            {% endfor %}
-        </select>
+        {{ form.as_table }}
         <button type="submit">Filter</button>
     </form>
 
     <ul>
         {% for student in students %}
-            <li>{{ student.name }} - {{ student.email }}</li>
+            <li>
+                {{ student.last_name }} {{ student.first_name }}  - {{ student.email }}
+                <ul>
+                    {% for project in student.projects.all %}
+                        <li>{{ project.title }}</li>
+                    {% empty %}
+                        <li>No projects for this student.</li>
+                    {% endfor %}
+                </ul>
+            </li>
         {% empty %}
             <li>No active members found.</li>
         {% endfor %}

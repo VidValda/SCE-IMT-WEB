@@ -1,0 +1,10 @@
+{% for group in widget %}
+<ul>
+    {% for checkbox in group %}
+    <li>
+        {{ checkbox.tag }}
+        <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}

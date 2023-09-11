@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sce/', include('sce_app.urls')), # Include the SCE app URLs
+    path('', include('sce_app.urls')), # Include the SCE app URLs
 ]

@@ -5,12 +5,28 @@
     <title>Manage Projects</title>
 </head>
 <body>
+    <header>
+        <!-- Navigation bar goes here -->
+    </header>
     <h1>Manage Your Projects</h1>
     <form method="post">
         {% csrf_token %}
-        {{ project_form.as_p }}
+        {{ form.as_p }}
         <button type="submit">Save Project</button>
     </form>
-    <!-- List of user's projects goes here -->
+    <h2>Existing Projects</h2>
+    <ul>
+        {% for project in projects %}
+            <li>
+                {{ project.title }} - {{ project.description }}
+                <form method="delete" action="{% url 'delete_project' project.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No projects available.</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
